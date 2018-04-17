@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
+
+/// <summary>
+/// Descripción breve de SESION
+/// </summary>
+public class SESION
+{
+    private string usuario;
+    private string contrasena;
+    public SESION()
+    {
+        //
+        // TODO: Agregar aquí la lógica del constructor
+        //
+    }
+
+    public string _usuario {
+        get { return usuario; }
+        set { usuario = value; }
+    }
+    public string _contrasena
+    {
+        get { return contrasena; }
+        set { contrasena = value; }
+    }
+
+    public string   adminSesiones()
+    {
+        SqlConnectionStringBuilder BD= new SqlConnectionStringBuilder();
+        BD.DataSource = ".\\SQLEXPRESS";
+        BD.InitialCatalog = "AVIOS";
+        SqlConnection conexion = new SqlConnection(BD.ConnectionString);
+        string comando = "select contraseña from CREDENCIALES where usuario='" + usuario + "')";
+        conexion.Open();
+        SqlCommand comandoEjecutar = new SqlCommand(comando, conexion);
+        comandoEjecutar.ExecuteNonQuery();
+        return comando;
+    }
+}
